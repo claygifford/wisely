@@ -6,6 +6,8 @@ env:
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 14.15.1
     commands:
       - echo Entered the install phase...     
     finally:
