@@ -4,6 +4,7 @@
   "description": "Wisely Take Home Test",
   "main": "index.js",
   "scripts": {
+    "start": "node dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node dist",
     "compile-server": "tsc"
