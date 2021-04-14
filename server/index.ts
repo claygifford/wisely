@@ -1,11 +1,10 @@
-import app from './app'
+import App from './app';
+import ReservationController from './reservations/reservation-controller';
 
-const port = process.env.PORT || 3000
-
-app.listen(port, (err) => {
-  if (err) {
-    return console.log(err)
-  }
-
-  return console.log(`server is listening on ${port}`)
-})
+const app = new App(
+    process.env.PORT || 3000,
+    [
+        new ReservationController()
+    ]
+);
+app.listen();
