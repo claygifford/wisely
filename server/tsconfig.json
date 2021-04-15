@@ -6,7 +6,7 @@
       "sourceMap": true
     },
     "include": [
-      "server/**/*.ts"
+      "**/*.ts"
     ],
     "exclude": [
       "node_modules"

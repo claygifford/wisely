@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import path = require('path');
 
 class App {
   public app: express.Application;
@@ -9,6 +10,9 @@ class App {
     this.initializeMiddlewares();
     this.mountRoutes();
     this.initializeControllers(controllers);
+    this.app.use(express.static(path.join(__dirname, 'dist')));
+    this.app.use(express.static('public'));
+    //this.app.use('dist');
   }
 
   private initializeMiddlewares() {
@@ -18,11 +22,12 @@ class App {
   private mountRoutes (): void {    
     const router = express.Router();        
     router.get('/', (req, res) => {
-      res.json({
-        message: 'Hello World!'
-      });
+      res.sendFile(__dirname + '/index.html');
+      //res.json({
+      //  message: 'Hello World!'
+      //});
     });
-    this.app.use('/', router);
+    //this.app.use('/', router);
   }
 
   private initializeControllers(controllers) {

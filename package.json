@@ -1,33 +1,33 @@
 {
-  "name": "wisely",
-  "version": "1.0.0",
-  "description": "Wisely Take Home Test",
-  "main": "index.js",
-  "scripts": {
-    "start": "node dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node dist",
-    "compile-server": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/claygifford/wisely.git"
-  },
-  "keywords": [],
-  "author": "Clay Gifford",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/claygifford/wisely/issues"
-  },
-  "homepage": "https://github.com/claygifford/wisely#readme",
-  "dependencies": {
-    "@types/node": "^14.14.37",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.7",
-    "typescript": "^4.2.4"
-  },
-  "engines": {
-    "node": "14.15.1",
-    "npm": "6.14.9"
+    "name": "wisely",
+    "version": "1.0.0",
+    "description": "Wisely Take Home Test",
+    "main": "node/index.js",
+    "scripts": {
+      "start": "node dist",
+      "serve": "set PORT=5000 && node dist"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/claygifford/wisely.git"
+    },
+    "keywords": [],
+    "author": "Clay Gifford",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/claygifford/wisely/issues"
+    },
+    "homepage": "https://github.com/claygifford/wisely#readme",
+    "dependencies": {
+      "@types/node": "^14.14.37",
+      "express": "^4.17.1",
+      "nodemon": "^2.0.7",
+      "typescript": "^4.2.4",
+      "vue": "^3.0.11"
+    },
+    "engines": {
+      "node": "14.15.1",
+      "npm": "6.14.9"
+    }
   }
-}
+  
