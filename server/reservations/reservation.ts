@@ -1,7 +1,9 @@
 interface Reservation {
-    author: string;
-    content: string;
-    title: string;
+    name: string,
+    status: string,
+    time: string;
+    email: string;
+    partysize: number
   }
    
   export default Reservation;

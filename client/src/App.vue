@@ -7,20 +7,17 @@
       <router-view></router-view>
     </div>    
   </div>
-  <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import SideBarNav from './components/SideBarNav.vue'
 import MenuHeader from './components/MenuHeader.vue'
-import HelloWorld from './components/HelloWorld.vue'
 import Breadcrumb from './components/Breadcrumb.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld,
     SideBarNav,
     MenuHeader,
     Breadcrumb
@@ -30,7 +27,7 @@ export default defineComponent({
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

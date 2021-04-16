@@ -6,83 +6,67 @@
       </button>
     </div>
   </div>
-  <div class="flex flex-col p-2">
-    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Title
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Role
-                </th>
-                <th scope="col" class="relative px-6 py-3">
-                  <span class="sr-only">Edit</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="reservation in reservations" :key="reservation.id">
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
-                      <img class="h-10 w-10 rounded-full" :src="reservation.image" alt="" />
-                    </div>
-                    <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">
-                        {{ reservation.name }}
-                      </div>
-                      <div class="text-sm text-gray-500">
-                        {{ reservation.email }}
-                      </div>
+  <div class="p-3">
+    <div class="bg-white shadow overflow-hidden sm:rounded-md">
+      <ul class="divide-y divide-gray-200">
+        <li v-for="reservation in reservations" :key="reservation.name">
+          <div class="block hover:bg-gray-50">
+            <div class="flex items-center px-4 py-4 sm:px-6">
+              <div class="min-w-0 flex-1 flex items-center">
+                <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                  <div style="align-items: flex-start; display: flex; flex-direction: column;">
+                    <p class="text-sm font-medium text-blue-600 truncate">{{ reservation.name }}</p>
+                    <p class="mt-2 flex items-center text-sm text-gray-500">
+                      <!-- <MailIcon class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" /> -->
+                      <span class="truncate">{{ reservation.email }}</span>
+                    </p>
+                  </div>
+                  <div class="hidden md:block">
+                    <div style="align-items: flex-start; display: flex; flex-direction: column;" >
+                      <p class="text-sm text-gray-900">
+                        {{reservation.time}}
+                      </p>
+                      <p class="mt-2 flex items-center text-sm text-gray-500">
+                        <!-- <CheckCircleIcon class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" aria-hidden="true" /> -->
+                         {{reservation.partysize}}
+                      </p>
                     </div>
                   </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{ reservation.title }}</div>
-                  <div class="text-sm text-gray-500">{{ reservation.department }}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    Active
-                  </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ reservation.role }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+                  
+                </div>
+              </div>
+              <div>
+                <a href="#" class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                  Edit
+                </a>
+                <a href="#" style="margin-left: 5px;" class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                  Delete
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
   <create-reservation-modal @close-dialog="showCreateReservation = false" :open="showCreateReservation"></create-reservation-modal>
 </template>
 
 <script lang="ts">
+//import { CheckCircleIcon, MailIcon } from '@heroicons/vue/solid'
+
 import { useStore } from 'vuex'
 import { ref, defineComponent, computed } from 'vue'
 import CreateReservationModal from '../modals/CreateReservationModal.vue'
 export default defineComponent({    
   name: 'Reservations',
-    components: {
-    CreateReservationModal
+  components: {
+    CreateReservationModal,
+  //   CheckCircleIcon,
+  //   MailIcon,
   },
   setup() {
-    var store = useStore();
+    var store = useStore()
     const showCreateReservation = ref(false)
     const reservations = computed(() => {
           return store.state.reservation.reservations
@@ -92,7 +76,7 @@ export default defineComponent({
     }
   },
   created() {
-    this.$store.dispatch('reservation/loadUsers');
+    this.$store.dispatch('reservation/loadReservations');
   }
 })
 
