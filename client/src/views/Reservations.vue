@@ -24,10 +24,11 @@
                   <div class="hidden md:block">
                     <div style="align-items: flex-start; display: flex; flex-direction: column;" >
                       <p class="text-sm text-gray-900">
+                        Time:
                         {{reservation.time}}
                       </p>
                       <p class="mt-2 flex items-center text-sm text-gray-500">
-                        <!-- <CheckCircleIcon class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" aria-hidden="true" /> -->
+                          Party Size:
                          {{reservation.partysize}}
                       </p>
                     </div>
@@ -53,7 +54,7 @@
 </template>
 
 <script lang="ts">
-//import { CheckCircleIcon, MailIcon } from '@heroicons/vue/solid'
+// import { CheckCircleIcon, MailIcon } from '@heroicons/vue/solid'
 
 import { useStore } from 'vuex'
 import { ref, defineComponent, computed } from 'vue'
@@ -62,14 +63,14 @@ export default defineComponent({
   name: 'Reservations',
   components: {
     CreateReservationModal,
-  //   CheckCircleIcon,
-  //   MailIcon,
+    // CheckCircleIcon,
+    // MailIcon,
   },
   setup() {
     var store = useStore()
     const showCreateReservation = ref(false)
     const reservations = computed(() => {
-          return store.state.reservation.reservations
+      return store.state.reservation.reservations
     })
     return {
       showCreateReservation, reservations

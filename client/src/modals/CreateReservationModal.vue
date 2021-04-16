@@ -33,7 +33,7 @@
                             Name
                           </label>
                           <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <input type="text" name="reservation_name" id="reservation_name" autocomplete="given-name" class="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
+                            <input v-model="name" type="text" name="reservation_name" id="reservation_name" autocomplete="given-name" class="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
                           </div>
                         </div>
 
@@ -50,23 +50,29 @@
                             Party Size
                           </label>
                           <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <input id="reservation_szie" name="reservation_size" type="text" autocomplete="partysize" class="block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md" placeholder="0"/>
+                            <input v-model="partysize" id="reservation_szie" name="reservation_size" type="text" autocomplete="partysize" class="block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md" placeholder="0"/>
                           </div>
                         </div>
                         <div style="display: flex; flex: 1;">
                           <div style="overflow: hidden; padding: 20px; flex: 1">
                             <div>Times</div>
                             <div style="overflow-y: auto; overflow-y: auto; max-height: 250px;">
-                              <div v-for="slot in slots" :key="slot.hour" style="padding: 2px 10px">
-                                <p class="text-sm font-medium text-blue-600 truncate">{{ slot.hour }}</p>
+                              <div v-for="slot in slots" :key="slot.hour" style="padding: 2px 10px" @click="selectSlot(slot)" v-bind:class="{ 'bg-blue-200': slot === selectedSlot }">
+                                <p class="text-sm font-medium text-blue-600 truncate" v-bind:class="{ 'text-white': slot === selectedSlot }">{{ slot.hour }}</p>
                               </div>
                             </div>
                           </div>
                           <div style="overflow: hidden; padding: 20px; flex: 1">
-                            <div>Slots</div>
                             <div style="overflow-y: auto; overflow-y: auto; max-height: 250px;">
-                              <div v-for="slot in slots" :key="slot.hour" style="padding: 2px 10px">
-                                <p class="text-sm font-medium text-blue-600 truncate">{{ slot.hour }}</p>
+                              <div style="display: flex; justify-content: center;">
+                                <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">Interval</p>
+                                <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">Available</p>
+                                <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">Reserved</p>
+                              </div>
+                              <div v-for="time in selectedSlot.times" :key="time.interval" style="padding: 2px 10px; display: flex; justify-content: center;" @click="selectInterval(time)" v-bind:class="{ 'bg-blue-200': time === selectedInterval }">
+                                <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">{{ time.interval }}</p>
+                                <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">{{ time.available }}</p>
+                                <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">{{ time.reserved }}</p>
                               </div>
                             </div>
                           </div>
@@ -119,7 +125,11 @@ export default {
   },
   data() {
     return {
+      name: '',
       email: '',      
+      partysize: 0,
+      selectedSlot: object,
+      selectedInterval: object
     }
   },
   mounted() {
@@ -127,11 +137,17 @@ export default {
   },
   methods: {
       OnSubmit() {
-        this.$store.dispatch('reservation/createReservation', { name: 'testing' })
+        this.$store.dispatch('reservation/createReservation', { name: this.$data.name, status: 'Active', time: '12 PM : 15', email: this.$data.email, partysize: this.$data.partysize })
         this.$emit('close-dialog', true)
       },
       OnCancel() {
         this.$emit('close-dialog', false)
+      },
+      selectSlot(slot) {
+        this.$data.selectedSlot = slot;
+      },
+      selectInterval(interval) {
+        this.$data.selectedInterval = interval;
       }
   }
 }
