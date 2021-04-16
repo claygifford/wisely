@@ -69,7 +69,7 @@
                                 <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">Available</p>
                                 <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">Reserved</p>
                               </div>
-                              <div v-for="time in selectedSlot.times" :key="time.interval" style="padding: 2px 10px; display: flex; justify-content: center;" @click="selectInterval(time)" v-bind:class="{ 'bg-blue-200': time === selectedInterval }">
+                              <div v-for="time in GetTimes(selectedSlot)" :key="time.interval" style="padding: 2px 10px; display: flex; justify-content: center;" @click="selectInterval(time)" v-bind:class="{ 'bg-blue-200': time === selectedInterval }">
                                 <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">{{ time.interval }}</p>
                                 <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">{{ time.available }}</p>
                                 <p class="text-sm font-medium text-gray-600 truncate" style="flex-basis: 80px;">{{ time.reserved }}</p>
@@ -128,8 +128,8 @@ export default {
       name: '',
       email: '',      
       partysize: 0,
-      selectedSlot: object,
-      selectedInterval: object
+      selectedSlot: {},
+      selectedInterval: {}
     }
   },
   mounted() {
@@ -148,6 +148,10 @@ export default {
       },
       selectInterval(interval) {
         this.$data.selectedInterval = interval;
+      },
+
+      GetTimes(item) {
+        return item.times;
       }
   }
 }

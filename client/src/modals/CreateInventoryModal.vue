@@ -162,6 +162,15 @@ export default {
   props: {
     open: Boolean
   },
+  data() {
+    return {
+      name: '',
+      email: '',      
+      partysize: 0,
+      selectedSlot: { },
+      selectedInterval: {}
+    }
+  },
   methods: {
       OnSubmit() {
         this.$store.dispatch('reservation/setInventory', { name: 'testing' })
