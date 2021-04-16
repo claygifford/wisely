@@ -128,18 +128,15 @@ export default {
       mobileMenuOpen,
     }
   },
-    methods: {
-        goto(item) {
-            if (item) {
-                this.$router.push(`/${item.path}`)    
-            }
-        },
-        isCurrent(item) {
-          return this.$route.matched.some(({ name }) => name.toLowerCase() === item.name.toLowerCase())
-          //return true;
-                
-                      //{{$route.matched.some(({ name }) => name === 'reservations')}}
+  methods: {
+    goto(item) {
+        if (item) {
+            this.$router.push(`/${item.path}`)    
         }
+    },
+    isCurrent(item) {
+      return this.$route.matched.some(({ name }) => name.toLowerCase() === item.name.toLowerCase())
     }
+  }
 }
 </script>
