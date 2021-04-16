@@ -1,12 +1,14 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import path = require('path');
+import * as cors from 'cors';
 
 class App {
   public app: express.Application;
 
   constructor(public port: any, controllers) {
     this.app = express();
+    this.app.use(cors());
     this.initializeMiddlewares();
     this.mountRoutes();
     this.initializeControllers(controllers);
@@ -32,7 +34,7 @@ class App {
 
   private initializeControllers(controllers) {
     controllers.forEach(controller => {
-      this.app.use('/', controller.router);
+      this.app.use('/api', controller.router);
     });
   }
 

@@ -3,10 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const cors = require("cors");
 class App {
     constructor(port, controllers) {
         this.port = port;
         this.app = express();
+        this.app.use(cors());
         this.initializeMiddlewares();
         this.mountRoutes();
         this.initializeControllers(controllers);
@@ -29,7 +31,7 @@ class App {
     }
     initializeControllers(controllers) {
         controllers.forEach(controller => {
-            this.app.use('/', controller.router);
+            this.app.use('/api', controller.router);
         });
     }
     listen() {

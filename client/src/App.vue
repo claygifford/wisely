@@ -1,15 +1,29 @@
 <template>
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <div class="h-screen bg-gray-50 flex overflow-hidden">
+    <side-bar-nav/>
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <menu-header/>
+      <breadcrumb/>
+      <router-view></router-view>
+    </div>    
+  </div>
+  <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import SideBarNav from './components/SideBarNav.vue'
+import MenuHeader from './components/MenuHeader.vue'
 import HelloWorld from './components/HelloWorld.vue'
+import Breadcrumb from './components/Breadcrumb.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    SideBarNav,
+    MenuHeader,
+    Breadcrumb
   }
 })
 </script>
